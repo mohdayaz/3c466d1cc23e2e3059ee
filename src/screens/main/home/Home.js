@@ -86,9 +86,20 @@ function Home({ navigation }) {
   //   return <View>{array.map((e,i)=> <Button>{i+1}</Button>)}</View>
   // }
 
+  const handleChange = (value) => {
+    // setFilterValue(e)\
+    const newrray = []
+    const data = exampleData
+    newArray = data.filter(e =>  e.title.includes(value) && e
+    )
+    console.log(newArray)
+    setExampleData(newArray)
+  }
+
   return (
     <View style={styles.root}>
       <ScrollView >
+        <Input placeholder="filter by title" onChangeText={e => handleChange(e)}/>
         <StatusBar backgroundColor={colors.secondaryBlue} barStyle='light-content' />
         {exampleData.map(e => <View style={styles.inputContainer}>
           <Text>Title: {e.title || "no Title Found"}</Text>
@@ -98,7 +109,7 @@ function Home({ navigation }) {
         </View>)} 
       </ScrollView>
       <Text>{isLoading ? "New Data Loading" : "Data Loaded"}</Text>
-      <Text>Page count: {count}</Text>
+      {count > 0 && <Text>Page count: {count -1 }</Text>}
     </View>
   );
 }
